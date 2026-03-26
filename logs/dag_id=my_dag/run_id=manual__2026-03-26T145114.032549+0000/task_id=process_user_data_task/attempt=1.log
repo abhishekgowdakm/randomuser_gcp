@@ -1,0 +1,25 @@
+[2026-03-26T14:51:39.564+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: my_dag.process_user_data_task manual__2026-03-26T14:51:14.032549+00:00 [queued]>
+[2026-03-26T14:51:39.582+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: my_dag.process_user_data_task manual__2026-03-26T14:51:14.032549+00:00 [queued]>
+[2026-03-26T14:51:39.583+0000] {taskinstance.py:2170} INFO - Starting attempt 1 of 2
+[2026-03-26T14:51:39.612+0000] {taskinstance.py:2191} INFO - Executing <Task(PythonOperator): process_user_data_task> on 2026-03-26 14:51:14.032549+00:00
+[2026-03-26T14:51:39.664+0000] {standard_task_runner.py:60} INFO - Started process 1707 to run task
+[2026-03-26T14:51:39.697+0000] {standard_task_runner.py:87} INFO - Running: ['***', 'tasks', 'run', 'my_dag', 'process_user_data_task', 'manual__2026-03-26T14:51:14.032549+00:00', '--job-id', '32', '--raw', '--subdir', 'DAGS_FOLDER/main.py', '--cfg-path', '/tmp/tmpurcx2dzs']
+[2026-03-26T14:51:39.701+0000] {standard_task_runner.py:88} INFO - Job 32: Subtask process_user_data_task
+[2026-03-26T14:51:39.904+0000] {task_command.py:423} INFO - Running <TaskInstance: my_dag.process_user_data_task manual__2026-03-26T14:51:14.032549+00:00 [running]> on host 77a29f06e2fb
+[2026-03-26T14:51:40.118+0000] {taskinstance.py:2480} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='my_dag' AIRFLOW_CTX_TASK_ID='process_user_data_task' AIRFLOW_CTX_EXECUTION_DATE='2026-03-26T14:51:14.032549+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2026-03-26T14:51:14.032549+00:00'
+[2026-03-26T14:51:40.132+0000] {logging_mixin.py:188} INFO - Processing user data: {'gender': 'female', 'name': {'title': 'Mrs', 'first': 'Chloe', 'last': 'Ambrose'}, 'location': {'street': {'number': 3703, 'name': 'Lake of Bays Road'}, 'city': 'Grand Falls', 'state': 'Nunavut', 'country': 'Canada', 'postcode': 'H8K 7Q6', 'coordinates': {'latitude': '-67.7870', 'longitude': '18.5982'}, 'timezone': {'offset': '-7:00', 'description': 'Mountain Time (US & Canada)'}}, 'email': 'chloe.ambrose@example.com', 'login': {'uuid': '40835969-0834-4b5e-9777-6ec7e6d93096', 'username': 'lazygorilla893', 'password': 'jarhead', 'salt': 'HpsUt4JB', 'md5': '388951af3b20eea3dbfdd93747b10253', 'sha1': 'ee4ced6fe7a9601ab06f9ed53afb0bf389c9ff36', 'sha256': '52a1a561011def68130c1b0e07b8fd5b9138cc5e5e7eaa913b53ca29b9cfb560'}, 'dob': {'date': '1989-05-26T16:55:31.414Z', 'age': 36}, 'registered': {'date': '2011-05-04T17:35:43.363Z', 'age': 14}, 'phone': 'L86 F06-4312', 'cell': 'P52 I20-5333', 'id': {'name': 'SIN', 'value': '704211036'}, 'picture': {'large': 'https://randomuser.me/api/portraits/women/85.jpg', 'medium': 'https://randomuser.me/api/portraits/med/women/85.jpg', 'thumbnail': 'https://randomuser.me/api/portraits/thumb/women/85.jpg'}, 'nat': 'CA'}
+[2026-03-26T14:51:40.134+0000] {taskinstance.py:2698} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/models/taskinstance.py", line 433, in _execute_task
+    result = execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/python.py", line 199, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/python.py", line 216, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/dags/main.py", line 31, in process_user_data
+    data_df = pd.json_normalize(data['results'])
+KeyError: 'results'
+[2026-03-26T14:51:40.184+0000] {taskinstance.py:1138} INFO - Marking task as UP_FOR_RETRY. dag_id=my_dag, task_id=process_user_data_task, execution_date=20260326T145114, start_date=20260326T145139, end_date=20260326T145140
+[2026-03-26T14:51:40.227+0000] {standard_task_runner.py:107} ERROR - Failed to execute job 32 for task process_user_data_task ('results'; 1707)
+[2026-03-26T14:51:40.281+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 1
+[2026-03-26T14:51:40.316+0000] {taskinstance.py:3280} INFO - 0 downstream tasks scheduled from follow-on schedule check
